@@ -9,14 +9,17 @@
 import UIKit
 
 
-// MARK: LAB 6 TODO: Create Protocol for PostImageViewControllerDelegate
+protocol PostImageViewControllerDelegate: class {
+    func imageSelected(controller: PostImageViewController, image: UIImage)
+}
 
 
 class PostImageViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var selectedImageView: UIImageView!
     
-    // MARK: LAB 6 TODO: Add delegate for the protocol you created
+    
+    weak var delegate: PostImageViewControllerDelegate!
     
 
     override func viewDidLoad() {
@@ -31,7 +34,7 @@ class PostImageViewController: UIViewController, UIImagePickerControllerDelegate
     @IBAction func onFinishPosting(_ sender: Any) {
         performSegue(withIdentifier: "unwindToDetail", sender: self)
         
-        // MARK: LAB 6 TODO: Pass image through protocol method
+        delegate.imageSelected(controller: self, image: self.selectedImageView.image!)
         
     }
     
